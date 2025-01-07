@@ -98,11 +98,7 @@ mapView.getMapboxMap().loadStyleUri(Style.DARK)
 mapView.getMapboxMap().loadStyleUri(Style.OUTDOORS)
 mapView.getMapboxMap().loadStyleUri(Style.TRAFFIC_DAY)
 ```
-![Opis slike](screenshots/screenshot1.jpg)
-![Opis slike](screenshots/screenshot2.jpg)
-![Opis slike](screenshots/screenshot3.jpg)
-<img src="screenshots/screenshot3.jpg" alt="Marker ikona" width="100" />
-
+<img src="screenshots/screenshot1.jpg" alt="Marker ikona" width="200" /><img src="screenshots/screenshot2.jpg" alt="Marker ikona" width="200" /><img src="screenshots/screenshot3.jpg" alt="Marker ikona" width="200" />
 
 Prikaz dodajanja markerja na zemljevid z določeno lokacijo.
 ```kotlin
@@ -120,4 +116,5 @@ mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) { style ->
     pointAnnotationManager.create(pointAnnotationOptions)
 }
 ```
+<img src="screenshots/screenshot4.jpg" alt="Marker ikona" width="200" />
 
