@@ -1,7 +1,5 @@
 # Mapbox Maps SDK for Android 🗺️
 
-## Zakaj? 🤔
-
 [Mapbox Maps SDK for Android](https://github.com/mapbox/mapbox-maps-android) je napredna knjižnica za integracijo zemljevidov in geolokacijskih funkcij v Android aplikacije. Omogoča ustvarjanje prilagodljivih zemljevidov z interaktivnimi funkcijami, kot so geokodiranje, sledenje GPS-u, 3D vizualizacije in podpora za offline delovanje. Knjižnico sem izbral zaradi njene prilagodljivosti, široke funkcionalnosti in aktivne skupnosti.
 
 ## Prednosti ✅
@@ -39,3 +37,40 @@
 - Zadnja posodobitev: ![GitHub last commit](https://img.shields.io/github/last-commit/mapbox/mapbox-maps-android)
 - Aktivnost prispevkov: ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mapbox/mapbox-maps-android)
 - Število razvijalcev: ![GitHub contributors](https://img.shields.io/github/contributors/mapbox/mapbox-maps-android)
+
+## Primer uporabe
+
+### mapbox_access_token.xml
+V direktoriju app/res/values je bilo potrebno generirati novo xml datoteko, ki služi kot ključ do Mapboxa.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="mapbox_access_token" translatable="false" tools:ignore="UnusedResources">pk.YOUR_MAPBOX_ACCESS_TOKEN</string>
+</resources>
+```
+### Dovoljenja
+Če se v aplikaciji uporablja lokacija uporabnika je potrebno urediti dovoljenja v Manifest.xml
+```xml
+<!-- Include this permission to grab user's general location -->
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<!-- Include only if your app benefits from precise location access. -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+```
+
+### Dodajanje knjižnice
+nekaj napisi... dodajanje preko Maven-a. V datoteko settings.gradle.kts je potrebno dodati maven repository.
+```kotlin
+    // Mapbox Maven repository
+    maven {
+        url = uri("https://api.mapbox.com/downloads/v2/releases/maven")
+    }
+```
+Preveriti je potrebno, da naš projekt uporablja minSdk najmanj 21.
+Nato pa še dodamo knjižnico v projekt.
+```kotlin
+    dependencies {
+        //...
+        implementation("com.mapbox.maps:android:11.9.0")
+        //...
+    }
+```
