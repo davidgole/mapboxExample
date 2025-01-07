@@ -7,23 +7,23 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mapbox.maps.Style
 import com.mapbox.maps.MapView
 
-class MainActivity : AppCompatActivity() {
+class DarkmapActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_darkmap)
 
         // Inicializacija MapView
         mapView = findViewById(R.id.mapView)
 
-        // Nastavi stil zemljevida na "normal" (defaultni stil Mapbox)
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS)
+        // Nastavi stil zemljevida na "Dark"
+        mapView.getMapboxMap().loadStyleUri(Style.DARK)
 
-        // Logika za preusmeritev na DarkmapActivity
-        val buttonNavigate = findViewById<Button>(R.id.button_navigate)
-        buttonNavigate.setOnClickListener {
-            val intent = Intent(this, DarkmapActivity::class.java)
+        // Logika za preusmeritev nazaj na MainActivity
+        val buttonBack = findViewById<Button>(R.id.button_back)
+        buttonBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }
