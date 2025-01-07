@@ -14,11 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Inicializacija MapView
-        mapView = findViewById(R.id.mapView)
 
-        // Nastavi stil zemljevida na "normal" (defaultni stil Mapbox)
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS)
+        mapView = findViewById(R.id.mapView)
+        mapView.getMapboxMap().loadStyleUri(Style.SATELLITE)
 
         // Logika za preusmeritev na DarkmapActivity
         val buttonNavigate = findViewById<Button>(R.id.button_navigate)

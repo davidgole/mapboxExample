@@ -4,17 +4,16 @@
 
 ## Prednosti ✅
 
-- **Prilagodljivi zemljevidi**: Podpira prilagoditve barv, slojev in ikon.
-- **Offline podpora**: Zemljevide lahko uporabljate brez internetne povezave.
+- **Prilagodljivi zemljevidi**: Podpira prilagoditve barv, slojev, ikone in animacije.
 - **Napredne funkcije**: 3D vizualizacija, geokodiranje, analitika prometa, sledenje v realnem času.
 - **Podpora za več platform**: Enostavna integracija z Android, iOS in spletnimi aplikacijami.
-- **Odlično dokumentirana API**: Ponuja bogato dokumentacijo in podporo za razvijalce.
+- **Odlično dokumentiran API**: Ponuja bogato dokumentacijo in podporo za razvijalce.
 
 ## Slabosti ❌
 
-- **Večja začetna krivulja učenja**: Napredne funkcije zahtevajo nekaj znanja in izkušenj.
-- **Zasnova plačljive storitve**: Napredne funkcionalnosti, kot so neomejeni zahtevki API ali Mapbox Studio, so plačljive.
-- **Odvisnost od Mapboxove infrastrukture**: Za delovanje nekaterih funkcij je potrebna aktivna povezava z Mapbox strežniki.
+- Napredne funkcije zahtevajo nekaj znanja in izkušenj.
+- Napredne funkcionalnosti, kot so neomejeni zahtevki API ali Mapbox Studio, so plačljive.
+- Za delovanje nekaterih funkcij je potrebna aktivna povezava z Mapbox strežniki.
 
 ## Licenca 📜
 
@@ -23,6 +22,7 @@
 ### Je Mapbox brezplačen?
 
 - **Da, za osnovno uporabo**. Mapbox ponuja brezplačen dostop za manjše projekte z omejenimi zahtevki API.
+- V večini primerov je zastonj do 50.000 uporabnikov.
 - Za komercialno uporabo ali večje projekte se zahteva plačljiva naročnina.
 
 ## Število zvezdic, sledilcev, forkov ⭐
@@ -58,7 +58,7 @@ V direktoriju app/res/values je bilo potrebno generirati novo xml datoteko, ki s
 ```
 
 ### Dodajanje knjižnice
-nekaj napisi... dodajanje preko Maven-a. V datoteko settings.gradle.kts je potrebno dodati maven repository.
+Dodajanje Maven repozitorija. V datoteko settings.gradle.kts je potrebno dodati maven repozitorij.
 ```kotlin
     // Mapbox Maven repository
     maven {
@@ -66,7 +66,7 @@ nekaj napisi... dodajanje preko Maven-a. V datoteko settings.gradle.kts je potre
     }
 ```
 Preveriti je potrebno, da naš projekt uporablja minSdk najmanj 21.
-Nato pa še dodamo knjižnico v projekt.
+Nato pa še dodamo knjižnico na ravni aplikacije v build.gradle.kts.
 ```kotlin
     dependencies {
         //...
@@ -74,3 +74,50 @@ Nato pa še dodamo knjižnico v projekt.
         //...
     }
 ```
+
+### Zemljevid v aplikaciji
+Po sinhronizaciji projekta lahko dodamo zemljevid v kodo. Najenostavneje, ga je dodati v željen layout.
+```xml
+<com.mapbox.maps.MapView
+    android:id="@+id/mapView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:mapbox_cameraTargetLat="39.5"
+    app:mapbox_cameraTargetLng="-98.0"
+    app:mapbox_cameraZoom="2.0"
+    app:mapbox_cameraPitch="0.0"
+    app:mapbox_cameraBearing="0.0" />
+```
+V MainActivity.kt do zemljevida dostopamo preko njegovega ID imena in mu lahko nastavimo poljubne nastavitve.
+Spodaj mam prikazanih nekaj različnih stilov zemljevidov. Svoj lasten zemljevid pa je mogoče ustvariti v Mapbox Studiu.
+```kotlin
+mapView = findViewById(R.id.mapView)
+mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS)
+mapView.getMapboxMap().loadStyleUri(Style.SATELLITE)
+mapView.getMapboxMap().loadStyleUri(Style.DARK)
+mapView.getMapboxMap().loadStyleUri(Style.OUTDOORS)
+mapView.getMapboxMap().loadStyleUri(Style.TRAFFIC_DAY)
+```
+![Opis slike](screenshots/screenshot1.jpg)
+![Opis slike](screenshots/screenshot2.jpg)
+![Opis slike](screenshots/screenshot3.jpg)
+<img src="screenshots/screenshot3.jpg" alt="Marker ikona" width="100" />
+
+
+Prikaz dodajanja markerja na zemljevid z določeno lokacijo.
+```kotlin
+mapView = findViewById(R.id.mapView)
+mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) { style ->
+    val annotationApi = mapView.annotations
+    val pointAnnotationManager: PointAnnotationManager =
+        annotationApi.createPointAnnotationManager()
+    val point = Point.fromLngLat(-98.0, 39.5)
+    val bitmap = BitmapFactory.decodeResource(resources, R.drawable.red_marker)
+    val pointAnnotationOptions = PointAnnotationOptions()
+        .withPoint(point)
+        .withIconImage(bitmap)
+        .withIconSize(0.3)
+    pointAnnotationManager.create(pointAnnotationOptions)
+}
+```
+
