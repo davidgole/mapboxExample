@@ -23,7 +23,7 @@ class DarkmapActivity : AppCompatActivity() {
         mapView = findViewById(R.id.mapView)
 
         // Naloži slog zemljevida in dodaj marker
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) { style ->
+        mapView.getMapboxMap().loadStyleUri(Style.TRAFFIC_NIGHT) { style ->
             // Dodamo marker šele po tem, ko je stil zemljevida uspešno naložen
             addMarker()
         }

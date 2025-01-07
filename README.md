@@ -118,3 +118,8 @@ mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) { style ->
 ```
 <img src="screenshots/screenshot4.jpg" alt="Marker ikona" width="200" />
 
+## Primer zemljevida v aplikaciji MileMate
+### Opis aplikacije
+Aplikacija je namenjena beleženju potnih stroškov v različnih organizacijah ali skupinam. Uporabnik vnese trenutno lokacijo ali pa jo vnese na zemljevidu in končno lokacijo, aplikacija nato izračuna stroške poti po podanih parametrih.
+
+<img src="screenshots/screenshot5.jpg" alt="Marker ikona" width="300" />
