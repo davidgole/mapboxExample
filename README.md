@@ -22,7 +22,7 @@
 ### Je Mapbox brezplačen?
 
 - **Da, za osnovno uporabo**. Mapbox ponuja brezplačen dostop za manjše projekte z omejenimi zahtevki API.
-- V večini primerov je zastonj do 50.000 uporabnikov.
+- V večini primerov je zastonj do 25.000 uporabnikov.
 - Za komercialno uporabo ali večje projekte se zahteva plačljiva naročnina.
 
 ## Število zvezdic, sledilcev, forkov ⭐
